@@ -7,11 +7,23 @@ using namespace std;
 const int MAX_RESERVASI = 20;
 int jumlah_reservasi = 0;
 
-struct Reservasi {
-    string nama_pasien;
+struct Pasien {
+    string nama;
+};
+
+struct Jadwal {
     string tanggal;
     string jam;
-    string dokter;
+};
+
+struct Dokter {
+    string nama;
+};
+
+struct Reservasi {
+    Pasien pasien;
+    Jadwal jadwal;
+    Dokter dokter;
 };
 
 Reservasi reservasi[MAX_RESERVASI];
@@ -64,15 +76,15 @@ int main() {
                 cout << "Data reservasi penuh!" << endl;
             } else {
                 cout << "\nMasukkan Nama Pasien : ";
-                getline(cin, reservasi[jumlah_reservasi].nama_pasien);
+                getline(cin, reservasi[jumlah_reservasi].pasien.nama);
                 cout << "Masukkan Tanggal (DD-MM-YYYY) : ";
-                getline(cin, reservasi[jumlah_reservasi].tanggal);
+                getline(cin, reservasi[jumlah_reservasi].jadwal.tanggal);
                 cout << "Masukkan Jam (HH:MM) : ";
-                getline(cin, reservasi[jumlah_reservasi].jam);
+                getline(cin, reservasi[jumlah_reservasi].jadwal.jam);
                 cout << "Masukkan Nama Dokter : ";
                 string nama_dokter;
                 getline(cin, nama_dokter);
-                reservasi[jumlah_reservasi].dokter = "Drg. " + nama_dokter;
+                reservasi[jumlah_reservasi].dokter.nama = "Drg. " + nama_dokter;
                 jumlah_reservasi++;
                 cout << "Reservasi berhasil ditambahkan!" << endl;
             }
@@ -85,10 +97,10 @@ int main() {
                 cout << "=====================================================================" << endl;
                 for (int i = 0; i < jumlah_reservasi; i++) {
                     cout << "| " << setw(3) << i+1 << " | "
-                         << setw(20) << left << reservasi[i].nama_pasien << " | "
-                         << setw(10) << reservasi[i].tanggal << " | "
-                         << setw(5) << reservasi[i].jam << " | "
-                         << setw(15) << left << reservasi[i].dokter << " |" << endl;
+                         << setw(20) << left << reservasi[i].pasien.nama << " | "
+                         << setw(10) << reservasi[i].jadwal.tanggal << " | "
+                         << setw(5) << reservasi[i].jadwal.jam << " | "
+                         << setw(15) << left << reservasi[i].dokter.nama << " |" << endl;
                 }
                 cout << "=====================================================================" << endl;
             }
@@ -103,15 +115,15 @@ int main() {
                 cout << "Nomor reservasi tidak valid!" << endl;
             } else {
                 cout << "\nMasukkan Nama Pasien : ";
-                getline(cin, reservasi[indeks-1].nama_pasien);
+                getline(cin, reservasi[indeks-1].pasien.nama);
                 cout << "Masukkan Tanggal (DD-MM-YYYY) : ";
-                getline(cin, reservasi[indeks-1].tanggal);
+                getline(cin, reservasi[indeks-1].jadwal.tanggal);
                 cout << "Masukkan Jam (HH:MM) : ";
-                getline(cin, reservasi[indeks-1].jam);
+                getline(cin, reservasi[indeks-1].jadwal.jam);
                 cout << "Masukkan Nama Dokter : ";
                 string nama_dokter;
                 getline(cin, nama_dokter);
-                reservasi[indeks-1].dokter = "Drg. " + nama_dokter;
+                reservasi[indeks-1].dokter.nama = "Drg. " + nama_dokter;
                 cout << "Reservasi berhasil diperbarui!" << endl;
             }
         }
